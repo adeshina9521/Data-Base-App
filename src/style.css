@@ -46,7 +46,13 @@ main{
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor:pointer;
+    background-color:white
 
+}
+
+.die-num{
+    font-size: 2rem;
 }
 .die{
     /* width: 50%; */

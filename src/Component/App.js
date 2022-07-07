@@ -4,56 +4,35 @@ import Die from "./Die"
 
 
 export default function App(){
+
+    const [dice, setdice] = React.useState(allNewDice())
+    
+    
+
+    function allNewDice(){
+        const newDice = [ ]
+        for(let i=0; i<10; i++ ){
+            newDice.push(Math.ceil(Math.random()* 6))
+        }
+       return newDice
+    }
+    console.log(allNewDice())
+
+    const dieElement = dice.map(
+        function myDie(die){
+            return  <Die value = {die}/>
+        }
+        )
     return(
         <div>
-             <h3>Tanzie Game</h3>
+             
 
             <main>
+            <h3>Tanzie Game</h3>
                 <div className="die">
-
-                        <Die
-                        // className = "die1"
-                        value = "1"
-                        />
-                        <Die
-                        // className = "die2"                  
-                        value = "2"
-                        />
-                        <Die
-                        // className = "die3"
-                        value = "1"
-                        />
-                        <Die
-                        // className = "die4"
-                        value = "1"
-                        />
-                        <Die
-                        // className = "die5"
-                        value = "1"
-                        />
-                        <Die
-                        // className = "die5"
-                        value = "1"
-                        />
-                        <Die
-                        // className = "die7"
-                        value = "1"
-                        />
-                        <Die
-                        // className = "die8"      
-                        value = "1"
-                        />
-                        <Die
-                        // className = "die9"      
-                        value = "1"
-                        />
-                        <Die
-                        // className = "die10"      
-                        value = "1"
-                        />
-
-                        
+                       {dieElement}            
                 </div>
+                <button>roll the dice</button>
             </main>
             <Footer/>
         </div>
