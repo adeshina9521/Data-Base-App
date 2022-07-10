@@ -24,7 +24,14 @@ export default function App(){
     }
 
     function holdDice(id){
-        return console.log(id) 
+         setDice(function(prevDice){
+           return prevDice.map(
+                function(die){
+                   return die.id === id ? {...die, isHeld: !die.isHeld} : die 
+                }
+            )
+        })
+
                 
     }
     const dieElement = dice.map(
