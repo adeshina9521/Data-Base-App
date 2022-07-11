@@ -2,22 +2,41 @@ import React from "react"
 import Footer from "./Footer"
 import Die from "./Die"
 import {nanoid }from "nanoid"
+import Confetti from "react-confetti"
 
 
 export default function App(){
 
     const [dice, setDice] = React.useState(allNewDice())
+
+    const [tenzies, setTenzies] = React.useState(false)
     
-    
+    React.useEffect (function (){
+        const allHeld = dice.every(function(die){
+                                        return die.isHeld 
+                                     })
+        const firstValue = dice[0].value
+        const allSameValue = dice.every(function(die){
+                                            return die.value === firstValue
+                                           })
+        if (allHeld && allSameValue){
+            setTenzies(true)
+            console.log("You won")
+
+        }
+    }, [dice])
+    function generateNewDie(){
+        return {value: Math.ceil(Math.random()* 6),
+            isHeld: false,
+             id:nanoid(),
+
+            }
+    }
 
     function allNewDice(){
         const newDice = [ ]
         for(let i=0; i<10; i++ ){
-            newDice.push({value: Math.ceil(Math.random()* 6),
-                           isHeld: false,
-                            id:nanoid(),
-
-                           })
+            newDice.push(generateNewDie())
         }
 
        return newDice
@@ -49,18 +68,26 @@ export default function App(){
         )
 
     function rollDice(){
-        setDice(allNewDice())
+        setDice(function(prevDice){
+           return prevDice.map(
+               function(die){
+                   return die.isHeld ? die : generateNewDie()
+               }
+           ) 
+        })
     }
 
     
     return(
         <div>
             <main>
-                <h3>Tanzie Game</h3>
+            {tenzies && <Confetti />}
+            <h1 className="title">Tenzies</h1>
+            <p className="instructions">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
                     <div className="die">
                         {dieElement}            
                     </div>
-                    <button onClick={rollDice}className="roll">Roll</button>
+                    <button onClick={rollDice}className="roll">{tenzies ? "New Game" : "Roll"}</button>
             </main>
             <Footer/>
         </div>
