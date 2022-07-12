@@ -21,7 +21,6 @@ export default function App(){
                                            })
         if (allHeld && allSameValue){
             setTenzies(true)
-            console.log("You won")
 
         }
     }, [dice])
@@ -68,13 +67,19 @@ export default function App(){
         )
 
     function rollDice(){
-        setDice(function(prevDice){
-           return prevDice.map(
-               function(die){
-                   return die.isHeld ? die : generateNewDie()
-               }
-           ) 
-        })
+        if(!tenzies){
+            setDice(function(prevDice){
+               return prevDice.map(
+                   function(die){
+                       return die.isHeld ? die : generateNewDie()
+                   }
+               ) 
+            })
+
+        }else{
+            setTenzies(false)
+            setDice(allNewDice())
+        }
     }
 
     
