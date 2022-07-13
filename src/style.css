@@ -65,21 +65,16 @@ main{
 .die-num{
     font-size: 2rem;
 }
+
 .die{
-    /* width: 50%; */
-    /* height: 0%; */
+
     display: grid;
     grid-template: auto auto / repeat(5, 1fr);
-    
-    /* text-align: center; */
     gap: 20px;
-    /* flex-wrap: wrap; */
 }
 .roll{
-    /* height: 50px; */
     padding: 2rem;
-    /* width:100px ; */
-   border: none;
+    border: none;
     color:white;
     background-color: #5035FF;
     font-size: 2rem;
@@ -101,7 +96,6 @@ button{
 .card-ft{
     background-color: rgb(26, 23, 23);
     height: 12.3vh;
-    width: 100%;
     color: white;
     margin-top: 0px;
     text-align: center;
